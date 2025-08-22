@@ -20,9 +20,9 @@ type AutocompleteProps<T extends { id: number | string; name: string }> = {
   setSelectedItem?: (item: T | null) => void;
 };
 
-function debounce<T extends (...args: any[]) => void>(func: T, delay = 300) {
+function debounce<Args extends unknown[]>(func: (...args: Args) => void, delay = 300) {
   let timer: NodeJS.Timeout;
-  return function (...args: Parameters<T>) {
+  return (...args: Args) => {
     clearTimeout(timer);
     timer = setTimeout(() => func(...args), delay);
   };
